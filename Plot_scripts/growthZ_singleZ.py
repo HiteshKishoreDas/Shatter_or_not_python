@@ -22,8 +22,8 @@ import pyPLUTO as pp
 Nz = 6
 NT = 1000
 
-Z_arr = np.array([0.3,0.6,0.9,1.2])
-col_arr = ['tab:red','tab:orange','tab:green','tab:blue']
+Z_arr = np.array([0.6])
+col_arr = ['tab:blue','tab:red']
 
 Y     = 1.01
 T_arr = np.logspace(4,8,num=NT)
@@ -100,11 +100,11 @@ for Z in Z_arr:
         w_ib_arr_2[i] = (2-lf.lamT(T_arr_2[i],Z))/(gamma*tc0_arr_2[i])
         w_ic_arr_2[i] = (-lf.lamT(T_arr_2[i],Z))/(tc0_arr_2[i])
         
-    ax1.plot(T_arr,w_ib_arr/ut,label='Z = ' + str(Z) + r' Z$_\odot$',linewidth = 2,color=col_arr[color_cnt])
-    ax1.plot(T_arr,w_ic_arr/ut,linewidth = 2,linestyle='--',color=col_arr[color_cnt])
+    ax1.plot(T_arr,w_ib_arr/ut,label='Isobaric (small-scale)',linewidth = 5,color=col_arr[0])
+    ax1.plot(T_arr,w_ic_arr/ut,label='Isochoric (large-scale)',linewidth = 5,linestyle='--',color=col_arr[1])
     
-    ax2.plot(T_arr_2,w_ib_arr_2/ut,linewidth = 2,color=col_arr[color_cnt])
-    ax2.plot(T_arr_2,w_ic_arr_2/ut,linewidth = 2,linestyle='--',color=col_arr[color_cnt])
+    ax2.plot(T_arr_2,w_ib_arr_2/ut,linewidth = 5,color=col_arr[0])
+    ax2.plot(T_arr_2,w_ic_arr_2/ut,linewidth = 5,linestyle='--',color=col_arr[1])
     
     color_cnt +=1
     
@@ -138,7 +138,7 @@ ax2.axvspan(8.5e6, 2.5e7, alpha=0.3, color='gray')
 ax2.axvspan(2.5e6, 1e8, alpha=0.3, color='lightgray')
 
 
-ax1.text(1.39e4,-0.15*280,r"$\mathbf{I}$",ha='center', va='center',fontsize=20)
+ax1.text(1.39e4,-0.10*280,r"$\mathbf{I}$",ha='center', va='center',fontsize=20)
 ax1.text(5.8e4,-0.15*280,r"$\mathbf{I}$",ha='center', va='center',fontsize=20)
 
 ax1.text(2.2e4,-0.15*280,r"$\mathbf{II}$",ha='center', va='center',fontsize=20)
@@ -172,7 +172,7 @@ ax1.set_xlabel('Temperature (K)',fontsize=30)
 ax1.set_ylabel(r'Growth Rate ($Myr^{-1}$)',fontsize=35)
 #ax1.set_title(r'Growth rate vs. T',fontsize=40)
 
-ax1.legend(fontsize = 25,loc='lower right')
+ax1.legend(fontsize = 30,loc='lower right')
 ax1.tick_params(labelsize=25)
 ax2.tick_params(labelsize=20)
 ax1.indicate_inset_zoom(ax2,linewidth=3)
@@ -182,4 +182,4 @@ ax1.tick_params(axis="y", direction="inout", length=8, width=2)
 ax1.tick_params(axis="x", direction="inout", length=8, width=2)
 ax1.tick_params(axis="x", which='minor', direction="in", length=4, width=1)
 
-plt.savefig(wdir_script+'/wvT.png')
+plt.savefig(wdir_script+'/wvT_singleZ.png')
